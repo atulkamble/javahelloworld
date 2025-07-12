@@ -1,71 +1,151 @@
-# helloworldjava
+## 📦 Java Hello World Docker Project
 
-// launch ec2 - linux - ssh 
-SG: 22 inbound
+This guide will walk you through creating a simple Java Hello World app, containerizing it with Docker, and running it locally.
 
-```
-sudo yum update -y
-sudo yum install git -y
-git config --global user.name "Atul Kamble"
-git config --global user.email "atul_kamble@hotmail.com"
-git config --global credential.helper store
-git remote set-url origin https://tokent@github.com/atulkamble/helloworldjava.git
-```
-
-// create project folder on ec2
-```
-mkdir javaproject
-cd javaproject
-pwd
-touch test.java
-cat test.java
-nano test.java
-```
+---
 
 ```
-class test
-{
-    public static void main(String []args)
-    {
-     	System.out.println("Hello World.");
+git clone https://github.com/atulkamble/javahelloworld.git
+cd javahelloworld
+```
+
+## 📁 Project Structure
+
+```
+.
+├── Dockerfile
+└── HelloWorld.java
+```
+
+---
+
+## 📜 Steps to Build and Run
+
+### 1️⃣ Create Java Hello World Script
+
+```bash
+touch HelloWorld.java
+```
+
+Open and add the following code:
+
+```java
+public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, World from Dockerized Java App!");
     }
-};
+}
+```
 
-``` 
-// compile and run code
+Check the file:
+
+```bash
+cat HelloWorld.java
 ```
-java test.java
-nano test.java 
-cat test.java
+
+Run it locally to test (if you have Java installed):
+
+```bash
+java --version
+javac HelloWorld.java
+java HelloWorld
 ```
-// initiate git
-```
-echo "# helloworldjava" >> README.md
-git init
-git add README.md
-git commit -m "first commit"
-git branch -M main
-git remote add origin https://github.com/atulkamble/helloworldjava.git
-git push -u origin main
-``` 
-// create dockerfile
-```
+
+---
+
+### 2️⃣ Create Dockerfile
+
+```bash
 touch Dockerfile
-ls
-nano Dockerfile
-```
-```
-FROM openjdk:11
-WORKDIR /usr/src/app
-COPY . .
-RUN javac test.java
-CMD ["java", "test"]
-``` 
-// build Docker Image
-```
-sudo docker build -t atuljkamble/javahelloworld .
-sudo docker images
-sudo docker run atuljkamble/javahelloworld
-sudo docker push atuljkamble/javahelloworld
 ```
 
+Edit and add the following content:
+
+```Dockerfile
+# Use official OpenJDK base image
+FROM openjdk:21-slim
+
+# Set working directory
+WORKDIR /app
+
+# Copy source code to container
+COPY HelloWorld.java .
+
+# Compile Java file
+RUN javac HelloWorld.java
+
+# Command to run the compiled Java class
+CMD ["java", "HelloWorld"]
+```
+
+Check files:
+
+```bash
+ls
+```
+
+---
+
+### 3️⃣ Build Docker Image
+
+```bash
+docker build -t atuljkamble/javahelloworld .
+```
+
+Check Docker images:
+
+```bash
+docker images
+```
+
+---
+
+### 4️⃣ Push Docker Image to Docker Hub
+
+```bash
+docker push atuljkamble/javahelloworld
+```
+
+---
+
+### 5️⃣ Pull Image (if testing from another system)
+
+```bash
+docker pull atuljkamble/javahelloworld
+```
+
+---
+
+### 6️⃣ Run Docker Container
+
+```bash
+docker run atuljkamble/javahelloworld
+```
+
+Check running containers:
+
+```bash
+docker container ls
+docker ps -a
+```
+
+---
+
+## ✅ Output Example
+
+```
+Hello, World from Dockerized Java App!
+```
+
+---
+
+## 📌 Notes
+
+* Make sure you are logged in to Docker Hub before pushing:
+
+  ```bash
+  docker login
+  ```
+* Replace `atuljkamble` with your Docker Hub username if different.
+
+---
