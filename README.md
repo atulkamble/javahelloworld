@@ -24,13 +24,13 @@ cd javahelloworld
 ### 1️⃣ Create Java Hello World Script
 
 ```bash
-touch HelloWorld.java
+touch helloworld.java
 ```
 
 Open and add the following code:
 
 ```java
-public class HelloWorld {
+public class helloworld {
     public static void main(String[] args) {
         System.out.println("Hello, World from Dockerized Java App!");
     }
@@ -40,15 +40,15 @@ public class HelloWorld {
 Check the file:
 
 ```bash
-cat HelloWorld.java
+cat helloworld.java
 ```
 
 Run it locally to test (if you have Java installed):
 
 ```bash
 java --version
-javac HelloWorld.java
-java HelloWorld
+javac helloworld.java
+java helloworld
 ```
 
 ---
@@ -69,13 +69,13 @@ FROM openjdk:21-slim
 WORKDIR /app
 
 # Copy source code to container
-COPY HelloWorld.java .
+COPY helloworld.java .
 
 # Compile Java file
-RUN javac HelloWorld.java
+RUN javac helloworld.java
 
 # Command to run the compiled Java class
-CMD ["java", "HelloWorld"]
+CMD ["java", "helloworld"]
 ```
 
 Check files:
