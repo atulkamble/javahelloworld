@@ -89,7 +89,7 @@ ls
 ### 3️⃣ Build Docker Image
 
 ```bash
-docker build -t atuljkamble/javahelloworld .
+sudo docker buildx build -t docker.io/atuljkamble/javahelloworld --load .
 ```
 
 Check Docker images:
@@ -103,7 +103,7 @@ docker images
 ### 4️⃣ Push Docker Image to Docker Hub
 
 ```bash
-docker push atuljkamble/javahelloworld
+docker push docker.io/atuljkamble/javahelloworld
 ```
 
 ---
@@ -111,7 +111,7 @@ docker push atuljkamble/javahelloworld
 ### 5️⃣ Pull Image (if testing from another system)
 
 ```bash
-docker pull atuljkamble/javahelloworld
+docker pull docker.io/atuljkamble/javahelloworld
 ```
 
 ---
@@ -119,7 +119,7 @@ docker pull atuljkamble/javahelloworld
 ### 6️⃣ Run Docker Container
 
 ```bash
-docker run atuljkamble/javahelloworld
+docker run docker.io/atuljkamble/javahelloworld
 ```
 
 Check running containers:
